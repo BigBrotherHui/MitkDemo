@@ -376,7 +376,7 @@ void CaseManage::f_openCase()
     CaseManageControl*c=dynamic_cast<CaseManageControl*>(mCur.data());
     if (mCur == nullptr || c == nullptr)
         return;
-    QMetaObject::invokeMethod(c,"enableButtons",Q_ARG(bool,false));
+    //QMetaObject::invokeMethod(c,"enableButtons",Q_ARG(bool,false));
     qDebug()<<"Patient OpenCase end";
 }
 

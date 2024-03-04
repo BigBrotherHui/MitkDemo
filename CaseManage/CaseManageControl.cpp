@@ -279,7 +279,7 @@ void CaseManageControl::on_cb_close_clicked()
     patient->f_closeCase();
 
     mMainFunBase->f_OpenControl_toobar("MainToolBar");
-    enableButtons(1);
+    //enableButtons(1);
 }
 
 void CaseManageControl::on_pushButton_image_clicked()
