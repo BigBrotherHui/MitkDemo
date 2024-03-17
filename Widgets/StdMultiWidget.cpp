@@ -6,6 +6,26 @@
 #include "ui_StdMultiWidget.h"
 #include "QmitkStdMultiWidget.h"
 #include "QmitkLevelWindowWidget.h"
+#include <QmitkRenderWindow.h>
+class vtkMyCallback : public vtkCommand
+{
+public:
+    static vtkMyCallback* New() { return new vtkMyCallback; }
+
+    vtkMyCallback()
+    {
+    }
+
+    ~vtkMyCallback()
+    {
+
+    }
+
+    virtual void Execute(vtkObject* caller, unsigned long eventId, void* callData)
+    {
+        std::cout << "Execute" << std::endl;
+    }
+};
 
 StdMultiWidget::StdMultiWidget(QWidget *parent) :
     uFunBase(parent),
@@ -51,6 +71,8 @@ void StdMultiWidget::f_Init()
 
     multiWidget->setEnabled(1);
 
+    vtkSmartPointer<vtkMyCallback> m_callback = vtkSmartPointer<vtkMyCallback>::New();
+    multiWidget->GetRenderWindow4()->interactor()->AddObserver(vtkCommand::LeftButtonPressEvent, m_callback);
 
     levelWindowWidget = std::unique_ptr<QmitkLevelWindowWidget>(new QmitkLevelWindowWidget(viewParent));
     levelWindowWidget->setStyleSheet("background:#131720;color: #80848B;font-size: 10px;");

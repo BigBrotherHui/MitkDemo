@@ -94,9 +94,7 @@ CaseManage::CaseManage(QWidget *parent) :
         StdMultiWidget* std = dynamic_cast<StdMultiWidget*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_StdMultiWidget));
         if (!std)
             return;
-        qDebug() << "&&&&&&&&&&&&&3";
         std->f_Reset();
-        qDebug() << "&&&&&&&&&&&&&4";
     });
 }
 
