@@ -6,7 +6,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "ustatus.h"
-#include "umainfunbase.h"
 #include "CaseManageControl.h"
 #include "ui_CaseManageControl.h"
 #include "CaseManage.h"
@@ -134,27 +133,26 @@ void CaseManageControl::enableButtons(bool pIsEnable)
 
 void CaseManageControl::on_cb_new_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    if (mCur != nullptr)
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
+        return;
+    bool ret=c->f_addCase();
+    if(ret)
+        on_checkBox_previewDicom_clicked();
+    if(ret)
     {
-        bool ret=dynamic_cast<CaseManage*>(mCur.data())->f_addCase();
-        if(ret)
-            on_checkBox_previewDicom_clicked();
-        if(ret)
-        {
-            if(QMessageBox::Yes == QMessageBox::question(nullptr,"提示","病案创建完成，是否为病案添加图像？", QMessageBox::Yes | QMessageBox::No))
-                on_pushButton_image_clicked();
-        }
+        if(QMessageBox::Yes == QMessageBox::question(nullptr,"提示","病案创建完成，是否为病案添加图像？", QMessageBox::Yes | QMessageBox::No))
+            on_pushButton_image_clicked();
     }
+    
 }
 
 void CaseManageControl::on_cb_modi_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-     if (mCur != nullptr)
-     {
-         dynamic_cast<CaseManage*>(mCur.data())->f_modiCase();
-     }
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
+        return;
+    c->f_modiCase();
 }
 
 void CaseManageControl::on_cb_open_clicked()
@@ -164,23 +162,21 @@ void CaseManageControl::on_cb_open_clicked()
         QMessageBox::warning(this,"提示","请先选中病案再打开！");
         return;
     }
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-    if (mCur == nullptr || patient == nullptr)
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
         return;
-    patient->f_openCase();
+    c->f_openCase();
 }
 
 void CaseManageControl::on_pushButton_search_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-    if (mCur == nullptr || patient == nullptr)
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
         return;
     QString keyword=ui->lineEdit_search->text();
     if(keyword.isEmpty())
     {
-        patient->f_refreshTableWidget();
+        c->f_refreshTableWidget();
         return;
     }
     std::vector<casetable_tuple> ret;
@@ -192,7 +188,7 @@ void CaseManageControl::on_pushButton_search_clicked()
     {
         ret=uStatus::mSql->SearchCaseByKeywordAndCaseOperator(keyword,gCurrentUser.id);
     }
-    patient->f_refreshTableWidget(ret);
+    c->f_refreshTableWidget(ret);
 }
 
 void CaseManageControl::on_lineEdit_search_returnPressed()
@@ -202,11 +198,10 @@ void CaseManageControl::on_lineEdit_search_returnPressed()
 
 void CaseManageControl::on_cb_del_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-    if (mCur == nullptr || patient == nullptr)
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
         return;
-    int caseId=patient->f_GetSelectedCaseId();
+    int caseId=c->f_GetSelectedCaseId();
     if(caseId==-1)
     {
         QMessageBox::warning(nullptr,"提示","请先选中待删除病案！");
@@ -218,7 +213,7 @@ void CaseManageControl::on_cb_del_clicked()
     {
         return;
     }
-    bool ret=patient->f_RemoveCaseByCaseId(caseId);
+    bool ret=c->f_RemoveCaseByCaseId(caseId);
     if(!ret)
     {
         QMessageBox::warning(nullptr,"提示","删除失败！");
@@ -265,32 +260,19 @@ void CaseManageControl::on_checkBox_previewDicom_clicked()
 
 void CaseManageControl::on_cb_close_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-    if(mCur==nullptr || patient==nullptr)
-    {
+    uStatus::mMain->SetCurrentToolBar(MainWindow::ToolBarWidget_MainToolBar);
+    CaseManage* c = dynamic_cast<CaseManage *>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
         return;
-    }
-    uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_CloseControl_right("QWidget");
-
-    mMainFunBase->f_CloseControl_Center("StdMultiWidget");
-
-    patient->f_closeCase();
-
-    mMainFunBase->f_OpenControl_toobar("MainToolBar");
-    //enableButtons(1);
+    c->f_closeCase();
 }
 
 void CaseManageControl::on_pushButton_image_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-    CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-    if(mCur==nullptr || patient==nullptr)
-    {
+    CaseManage* c = dynamic_cast<CaseManage*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_CaseManage));
+    if (!c)
         return;
-    }
-    int id=patient->f_GetSelectedCaseId();
+    int id= c->f_GetSelectedCaseId();
     if(id==-1)
     {
         QMessageBox::warning(this,"提示","请先选中病案！");
@@ -301,11 +283,7 @@ void CaseManageControl::on_pushButton_image_clicked()
     if(QDialog::Accepted==d.exec())
     {
         RenderInfo renderInfo;
-        QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
-        CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
-        if (mCur == nullptr || patient == nullptr)
-            return;
-        int caseId=patient->f_GetSelectedCaseId();
+        int caseId=c->f_GetSelectedCaseId();
         if(caseId==-1)
             return;
         bool ok{false};

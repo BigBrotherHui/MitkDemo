@@ -9,19 +9,11 @@ MainWindow *uStatus::mMain=nullptr;
 QString uStatus::mVer = "V1";
 QString uStatus::mKernelVer = "V1.0.0.0.88";
 QString uStatus::mImageObjectPathName;
-QMessageLogContext uStatus::context;
 //Main
 QString uStatus::mMainDataDir="";
 QString uStatus::mLogDir="log";
 QString uStatus::mBackupDir="backup";
 QString uStatus::mDicomTmpDir="dicomTmpDir";
-QString uStatus::mMainConfigureFileName = "syscfg.ini";
-QString uStatus::mMainWindow="MainWindow";
-QString uStatus::mMainToolbarWidget="QWidget";
-QString uStatus::mMainCenterWidget="QWidget";
-QString uStatus::mMainControlWidgetRight="QWidget";
-QString uStatus::mMainControlWidgetLeft="QWidget";
-QString uStatus::mMainFootbarWidget="NULL";
 //
 QString uStatus::mMainPath = "";
 //QString uStatus::mCurClassName = "";
@@ -35,8 +27,6 @@ QString uStatus::mExternalGenDir = "";
 
 
 mitk::DataStorage::Pointer uStatus::mDataStorage = nullptr;
-
-QmitkStdMultiWidget *uStatus::mMultiWidget = nullptr;
 
 SqlDemo *uStatus::mSql= nullptr;
 //

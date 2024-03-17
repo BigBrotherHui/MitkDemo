@@ -12,7 +12,6 @@ StdMultiWidget::StdMultiWidget(QWidget *parent) :
     ui(new Ui::StdMultiWidget)
 {
     ui->setupUi(this);
-
     qDebug()<<"StdMultiWidget: create!";
 }
 

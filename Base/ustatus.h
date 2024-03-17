@@ -50,13 +50,6 @@ public:
 
 	static QString mVer;
 	static QString mKernelVer;
-    static QString mMainWindow;
-    static QString mMainToolbarWidget;
-    static QString mMainFootbarWidget;
-    static QString mMainCenterWidget;
-    static QString mMainControlWidgetRight;
-    static QString mMainControlWidgetLeft;
-    static QMessageLogContext context;
     //Mian
 
 	/**
@@ -80,7 +73,7 @@ public:
 	* @brief 程序运行时的主要配置文件信息
 	*
 	*/
-	static QString mMainConfigureFileName;
+	// static QString mMainConfigureFileName;
 
 	/**
 	* @brief 当前病人档案中的病人信息
@@ -123,8 +116,6 @@ public:
 	static QString mExternalGenDir;
 
     static mitk::DataStorage::Pointer mDataStorage;
-
-    static QmitkStdMultiWidget *mMultiWidget;
 
     static SqlDemo *mSql;
 

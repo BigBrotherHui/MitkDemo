@@ -21,8 +21,6 @@
 
 #include "global.h"
 #include "systemutil.h"
-#include "ufunction.h"
-#include "umainfunbase.h"
 #include "StdMultiWidget.h"
 #include "ustatus.h"
 #include "CaseManageControl.h"
@@ -85,19 +83,20 @@ CaseManage::CaseManage(QWidget *parent) :
     connect(ui->tableWidget, &QTableWidget::currentItemChanged, &GlobalSignal::instance(), &GlobalSignal::slot_updateDicom, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::DirectConnection));
     connect(this,&CaseManage::signalFinishedOpen,this,[&]
     {
-        uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-
-        mMainFunBase->f_OpenControl_toobar("SubToolBar");
-        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar","").data())->f_Refresh();
-        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar","").data())->setCurrentPage(SubToolBar::Page_PreOperation_Design);
-        mMainFunBase->f_Open_Center("StdMultiWidget");
-        mMainFunBase->f_OpenControl_right("PreOperationDesignControl");
-        QPointer<uFunBase> mStd = uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget","");
-        if (mStd != nullptr)
-        {
-            dynamic_cast<StdMultiWidget *>(mStd.data())->f_Reset();
-        }
-
+        SubToolBar* toolbar = dynamic_cast<SubToolBar*>(uStatus::mMain->GetToolBarWidget(MainWindow::ToolBarWidget_SubToolBar));
+        if (!toolbar)
+            return;
+        uStatus::mMain->SetCurrentToolBar(MainWindow::ToolBarWidget_SubToolBar);
+        toolbar->f_Refresh();
+        toolbar->setCurrentPage(SubToolBar::Page_PreOperation_Design);
+        uStatus::mMain->SetCurrentCenterWidget(MainWindow::CenterWidget_StdMultiWidget);
+        uStatus::mMain->SetCurrentControlWidget(MainWindow::ControlWidget_PreOperationDesignControl);
+        StdMultiWidget* std = dynamic_cast<StdMultiWidget*>(uStatus::mMain->GetCenterWidget(MainWindow::CenterWidget_StdMultiWidget));
+        if (!std)
+            return;
+        qDebug() << "&&&&&&&&&&&&&3";
+        std->f_Reset();
+        qDebug() << "&&&&&&&&&&&&&4";
     });
 }
 
@@ -346,14 +345,6 @@ void CaseManage::f_openCase()
     gCurrentCase=tuple;
     uStatus::mCurrentPatientID = QString::number(caseId);
 
-    QPointer<uFunBase> b=uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget","");
-    if(b)
-    {
-        auto w=dynamic_cast<StdMultiWidget *>(b.data());
-        if(w)
-            uStatus::mMultiWidget=w->GetMultiWidget();
-    }
-    qDebug() << "Patient::f_openCase 0";
     QList<QTableWidgetItem*> list_item = ui->tableWidget->selectedItems();
     if (list_item.size() == 0)
     {
@@ -364,11 +355,6 @@ void CaseManage::f_openCase()
     mCurrentRowNumbe = ui->tableWidget->selectedItems().at(0)->row();
     f_setCurrentRow(mCurrentRowNumbe);
     f_openCaseByID(caseId);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManageControl","");
-    CaseManageControl*c=dynamic_cast<CaseManageControl*>(mCur.data());
-    if (mCur == nullptr || c == nullptr)
-        return;
-    //QMetaObject::invokeMethod(c,"enableButtons",Q_ARG(bool,false));
     qDebug()<<"Patient OpenCase end";
 }
 

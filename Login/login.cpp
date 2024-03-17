@@ -18,14 +18,12 @@
 #include <QDateTime>
 // vtk
 #include <itkOutputWindow.h>
-#include <vtkOutputWindow.h>
 
 #include "runtimeutil.h"
 #include "systemutil.h"
 #include "SqlDemo.h"
 #include "global.h"
 #include "ustatus.h"
-#include "ufunction.h"
 #include "mainframe.h"
 #include "cryptoutil.h"
 Login::Login(QWidget *parent) :

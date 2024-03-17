@@ -62,7 +62,7 @@ border-bottom:2px solid #1269D3;
 background: #131720;
 }</string>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10,1">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,10">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -328,7 +328,7 @@ border-image: url(:/Resources/robot_standby.png);</string>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,0">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
        <property name="spacing">
         <number>14</number>
        </property>
@@ -344,27 +344,6 @@ border-image: url(:/Resources/robot_standby.png);</string>
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="QStackedWidget" name="stackedWidget_control_left">
-         <property name="minimumSize">
-          <size>
-           <width>64</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <widget class="QWidget" name="page"/>
-         <widget class="QWidget" name="page_2"/>
-        </widget>
-       </item>
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="sizePolicy">
@@ -430,20 +409,6 @@ border-image: url(:/Resources/robot_standby.png);</string>
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QStackedWidget" name="stackedWidget_foot">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 170, 127);</string>
-      </property>
-      <widget class="QWidget" name="stackedWidget_bottomPage1"/>
      </widget>
     </item>
    </layout>
