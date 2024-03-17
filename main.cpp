@@ -24,6 +24,9 @@
 #include <QmitkRegisterClasses.h>
 #include <mitkRenderingManager.h>
 #include <mitkStandaloneDataStorage.h>
+#include "ureflect.h"
+//#include <usModuleInitialization.h>
+//US_INITIALIZE_MODULE
 VTK_MODULE_INIT(vtkRenderingOpenGL2)
 VTK_MODULE_INIT(vtkRenderingVolumeOpenGL2)
 VTK_MODULE_INIT(vtkInteractionStyle)
@@ -48,6 +51,7 @@ bool FindProcess(const char * name)
 
 int main(int argc, char *argv[])
 {
+	//qDebug() << US_STR(US_MODULE_NAME);
     vtkOutputWindow::SetGlobalWarningDisplay(0);
     QApplication a(argc, argv);
     a.setApplicationName("MitkDemo");
@@ -64,7 +68,7 @@ int main(int argc, char *argv[])
         RuntimeUtil::SetRunning(false);
     }
     QmitkRegisterClasses();
-    //
+    uReflect::registerAllClasses();
     uFunMap::mFunBaseMap = new QMap<QString, QPointer<uFunBase> >();
     uStatus::mDataStorage = mitk::StandaloneDataStorage::New();
 

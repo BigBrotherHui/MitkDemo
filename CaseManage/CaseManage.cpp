@@ -41,19 +41,12 @@
 #include <mitkProperties.h>
 #include "mitkPointSet.h"
 #include "QmitkIOUtil.h"
-
-int CaseManage::typeId = qRegisterMetaType<CaseManage*>();
-
+#include "ureflect.h"
 casetable_tuple CaseManage::currentCase;
 bool CaseManage::modifyCase = false;
 bool CaseManage::isOpen = false;
 
 CaseManage* mPatient;
-
-void f_RefreshPatientFunction()
-{
-    mPatient->f_refreshTableWidget();
-}
 
 void CaseManage::setCheckBox(int pRowIndex, bool isChecked) {
     if (pRowIndex < 0) {
@@ -80,7 +73,6 @@ CaseManage::CaseManage(QWidget *parent) :
     {
         mSql=new SqlDemo;
     }
-    uStatus::pFun_RefreshPatient = &(f_RefreshPatientFunction);
 
     this->f_refreshTableWidget();
 
@@ -96,11 +88,11 @@ CaseManage::CaseManage(QWidget *parent) :
         uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
 
         mMainFunBase->f_OpenControl_toobar("SubToolBar");
-        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar*","").data())->f_Refresh();
-        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar*","").data())->setCurrentPage(SubToolBar::Page_PreOperation_Design);
+        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar","").data())->f_Refresh();
+        dynamic_cast<SubToolBar *>(uFunction::getInStance()->f_GetObjectInstance("SubToolBar","").data())->setCurrentPage(SubToolBar::Page_PreOperation_Design);
         mMainFunBase->f_Open_Center("StdMultiWidget");
         mMainFunBase->f_OpenControl_right("PreOperationDesignControl");
-        QPointer<uFunBase> mStd = uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget*","");
+        QPointer<uFunBase> mStd = uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget","");
         if (mStd != nullptr)
         {
             dynamic_cast<StdMultiWidget *>(mStd.data())->f_Reset();
@@ -354,7 +346,7 @@ void CaseManage::f_openCase()
     gCurrentCase=tuple;
     uStatus::mCurrentPatientID = QString::number(caseId);
 
-    QPointer<uFunBase> b=uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget*","");
+    QPointer<uFunBase> b=uFunction::getInStance()->f_GetObjectInstance("StdMultiWidget","");
     if(b)
     {
         auto w=dynamic_cast<StdMultiWidget *>(b.data());
@@ -372,7 +364,7 @@ void CaseManage::f_openCase()
     mCurrentRowNumbe = ui->tableWidget->selectedItems().at(0)->row();
     f_setCurrentRow(mCurrentRowNumbe);
     f_openCaseByID(caseId);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManageControl*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManageControl","");
     CaseManageControl*c=dynamic_cast<CaseManageControl*>(mCur.data());
     if (mCur == nullptr || c == nullptr)
         return;
@@ -422,7 +414,9 @@ void CaseManage::f_LoadData(int )
     }
     mPlanImageDataMainSeries = vtkSmartPointer<Actor>(Actor::New());
     mPlanImageDataMainSeries->f_SetDataStorage(uStatus::mDataStorage);
-    mPlanImageDataMainSeries->f_LoadActor();
+    if(!mPlanImageDataMainSeries->f_LoadActor()){
+        return;
+    }
     progressUtil->Step(step);
 
 

@@ -19,7 +19,6 @@ class CaseManageControl : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
     struct RenderInfo
     {
     public:
@@ -37,8 +36,10 @@ public:
     };
     Q_INVOKABLE explicit CaseManageControl(QWidget *parent = nullptr);
     ~CaseManageControl();
+
 protected:
     void ShowDicom();
+
     Q_INVOKABLE void enableButtons(bool pIsEnable);
 private slots:
     void slot_updateDicom(QTableWidget* w, QTableWidgetItem* cur, QTableWidgetItem* prev);

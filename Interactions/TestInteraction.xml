@@ -1,0 +1,11 @@
+<statemachine>
+    <state name="start" startstate="true" >
+        <transition event_class="MousePressEvent" event_variant="StdMousePressPrimaryButtonLeft"  target="start">
+          <action name="addCenter"/>
+        </transition>
+    <transition event_class="MousePressEvent" event_variant="StdMousePressPrimaryButtonRight"  target="start">
+          <action name="test"/>
+        </transition>
+    </state>
+    <state name="final"/>
+</statemachine>

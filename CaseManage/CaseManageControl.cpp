@@ -19,9 +19,9 @@
 #include "QMessageBox.h"
 #include <vtkRenderer.h>
 #include "globalsignal.h"
+#include "ureflect.h"
 
 vtkSmartPointer<vtkDICOMImageReader>CaseManageControl::RenderInfo::reader=vtkSmartPointer<vtkDICOMImageReader>::New();
-int CaseManageControl::typeId = qRegisterMetaType<CaseManageControl*>();
 CaseManageControl::CaseManageControl(QWidget *parent) :
     uFunBase(parent),
     ui(new Ui::CaseManageControl)
@@ -134,7 +134,7 @@ void CaseManageControl::enableButtons(bool pIsEnable)
 
 void CaseManageControl::on_cb_new_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     if (mCur != nullptr)
     {
         bool ret=dynamic_cast<CaseManage*>(mCur.data())->f_addCase();
@@ -150,7 +150,7 @@ void CaseManageControl::on_cb_new_clicked()
 
 void CaseManageControl::on_cb_modi_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
      if (mCur != nullptr)
      {
          dynamic_cast<CaseManage*>(mCur.data())->f_modiCase();
@@ -164,7 +164,7 @@ void CaseManageControl::on_cb_open_clicked()
         QMessageBox::warning(this,"提示","请先选中病案再打开！");
         return;
     }
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
     if (mCur == nullptr || patient == nullptr)
         return;
@@ -173,7 +173,7 @@ void CaseManageControl::on_cb_open_clicked()
 
 void CaseManageControl::on_pushButton_search_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
     if (mCur == nullptr || patient == nullptr)
         return;
@@ -202,7 +202,7 @@ void CaseManageControl::on_lineEdit_search_returnPressed()
 
 void CaseManageControl::on_cb_del_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
     if (mCur == nullptr || patient == nullptr)
         return;
@@ -265,14 +265,14 @@ void CaseManageControl::on_checkBox_previewDicom_clicked()
 
 void CaseManageControl::on_cb_close_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
     if(mCur==nullptr || patient==nullptr)
     {
         return;
     }
     uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_CloseControl_right("uBlank");
+    mMainFunBase->f_CloseControl_right("QWidget");
 
     mMainFunBase->f_CloseControl_Center("StdMultiWidget");
 
@@ -284,7 +284,7 @@ void CaseManageControl::on_cb_close_clicked()
 
 void CaseManageControl::on_pushButton_image_clicked()
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
     CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
     if(mCur==nullptr || patient==nullptr)
     {
@@ -301,7 +301,7 @@ void CaseManageControl::on_pushButton_image_clicked()
     if(QDialog::Accepted==d.exec())
     {
         RenderInfo renderInfo;
-        QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage*","");
+        QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance("CaseManage","");
         CaseManage*patient=dynamic_cast<CaseManage*>(mCur.data());
         if (mCur == nullptr || patient == nullptr)
             return;

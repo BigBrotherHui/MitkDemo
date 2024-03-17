@@ -26,7 +26,6 @@ class StdMultiWidget : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
 
     Q_INVOKABLE explicit StdMultiWidget(QWidget *parent = nullptr);
     ~StdMultiWidget();
@@ -42,6 +41,7 @@ public:
     int f_BeforeClose() override;
 
     QmitkStdMultiWidget *GetMultiWidget();
+
 private:
     Ui::StdMultiWidget *ui;
 

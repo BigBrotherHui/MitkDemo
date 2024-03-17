@@ -71,7 +71,7 @@ void uMainFunBase::f_Open_Center(QString pName,QString pParameter)
         return;
     }
     mStackedWidget_Center->setVisible(true);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,"");
     for (int i =0 ; i < mStackedWidget_Center->count() ; i++)
     {
         if (mStackedWidget_Center->widget(i) == mCur)
@@ -105,7 +105,7 @@ void uMainFunBase::f_OpenControl_right(QString pName,QString pParameter)
         return;
     }
     mStackedWidget_control_right->setVisible(true);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*",pParameter);
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,pParameter);
 
     for (int i =0 ; i < mStackedWidget_control_right->count() ; i++)
     {
@@ -137,7 +137,7 @@ void uMainFunBase::f_OpenControl_left(QString pName,QString pParameter)
         return;
     }
     mStackedWidget_control_left->setVisible(true);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*",pParameter);
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,pParameter);
 
     for (int i =0 ; i < mStackedWidget_control_left->count() ; i++)
     {
@@ -171,7 +171,7 @@ void uMainFunBase::f_OpenControl_toobar(QString pName,QString pParameter)
         return;
     }
     mStackedWidget_control_toolbar->setVisible(true);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*",pParameter);
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,pParameter);
     for (int i =0 ; i < mStackedWidget_control_toolbar->count() ; i++)
     {
         if (mStackedWidget_control_toolbar->widget(i) == mCur)
@@ -204,7 +204,7 @@ void uMainFunBase::f_OpenControl_footbar(QString pName,QString pParameter)
         return;
     }
     mStackedWidget_control_footbar->setVisible(true);
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*",pParameter);
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,pParameter);
 
     for (int i =0 ; i < mStackedWidget_control_footbar->count() ; i++)
     {
@@ -286,5 +286,5 @@ void uMainFunBase::f_CloseControl_Center(QString pName,QString pParameter)
 
 void uMainFunBase::f_InitControl(QString pName)
 {
-    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName+"*","");
+    QPointer<uFunBase> mCur = uFunction::getInStance()->f_GetObjectInstance(pName,"");
 }

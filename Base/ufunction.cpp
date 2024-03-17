@@ -5,12 +5,11 @@
 #include "ustatus.h"
 #include "ufunbase.h"
 #include "ufunmap.h"
-
+#include "ureflect.h"
 uFunction::uFunction()
 {
 
 }
-
 
 uFunction *uFunction::self = nullptr;
 uFunction * uFunction::getInStance()
@@ -22,12 +21,6 @@ uFunction * uFunction::getInStance()
         }
     }
     return self;
-}
-
-
-void uFunction::f_Test()
-{
-    qDebug() << "uFunction::f_Test ... ...";
 }
 
 uMainFunBase *uFunction::f_GetMain()
@@ -55,7 +48,7 @@ QPointer<uFunBase> uFunction::f_GetObjectInstance(QString pObjectName, QString p
     else
     {
         qDebug() << "uFunction::f_GetObjectInstance not Exist";
-        int type = QMetaType::type( (pObjectName ).toStdString().c_str());
+        /*int type = QMetaType::type( (pObjectName ).toStdString().c_str());
         qDebug() << type;
         const QMetaObject *metaObj = QMetaType::metaObjectForType(type);
         QObject *obj = metaObj->newInstance(Q_ARG(QWidget*, nullptr));
@@ -63,10 +56,12 @@ QPointer<uFunBase> uFunction::f_GetObjectInstance(QString pObjectName, QString p
 
         QPointer<uFunBase> o_an = QPointer<uFunBase>(qobject_cast<uFunBase*>(obj));
         qDebug() <<"uFunction::f_GetObjectInstance Insert :"<< pObjectName+pParameter;
-        uFunMap::mFunBaseMap->insert(pObjectName+pParameter , o_an);
-
-//        uFunBase *an = qobject_cast<uFunBase*>(obj);
-        o_an->f_Init();
+        uFunMap::mFunBaseMap->insert(pObjectName+pParameter , o_an);*/
+        uFunBase *o_an=uReflect::newInstance(pObjectName);
+        if (!o_an)
+            return nullptr;
+		uFunMap::mFunBaseMap->insert(pObjectName + pParameter, o_an);
+		o_an->f_Init();
         return o_an;
     }
 }

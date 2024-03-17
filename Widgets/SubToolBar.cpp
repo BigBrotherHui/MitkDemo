@@ -9,8 +9,6 @@
 #include "global.h"
 #include <QButtonGroup>
 
-int SubToolBar::typeId = qRegisterMetaType<SubToolBar*>();
-
 SubToolBar::SubToolBar(QWidget *parent) :
     uFunBase(parent),
     ui(new Ui::SubToolBar)

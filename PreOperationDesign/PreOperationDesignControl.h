@@ -12,10 +12,9 @@ class PreOperationDesignControl : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
+    
     Q_INVOKABLE PreOperationDesignControl(QWidget *parent = nullptr);
     ~PreOperationDesignControl();
-
 private:
     Ui::PreOperationDesignControl *ui;
 };

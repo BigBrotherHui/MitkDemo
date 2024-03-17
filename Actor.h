@@ -27,7 +27,7 @@ public:
 	QString mObjectName = "";
 	float mOpacity = 1.0;
 	int mLayer = 0;
-		virtual int f_LoadActor();
+	virtual bool f_LoadActor();
 
 	mitk::DataNode::Pointer outputNode{nullptr};
 	mitk::DataStorage *f_GetDataStorage();

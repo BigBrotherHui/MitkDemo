@@ -24,10 +24,6 @@ file(GLOB_RECURSE HEADER_FILES "*.h")
 file(GLOB_RECURSE UI_FILES "*.ui")
 file(GLOB_RECURSE QRC_FILES "*.qrc")
 
-set(PROJECT_SOURCES
-        ${SOURCE_FILES} ${HEADER_FILES} ${UI_FILES} ${QRC_FILES}
-)
-
 foreach(_source IN ITEMS ${HEADER_FILES})
     get_filename_component(_source_path "${_source}" PATH)
     if(_source_path STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -87,7 +83,15 @@ foreach(subdir ${SUBDIRS})
         include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${subdir})
     endif()
 endforeach()
+usFunctionGenerateModuleInit(SOURCE_FILES)
+usFunctionGetResourceSource(TARGET ${PROJECT_NAME} OUT SOURCE_FILES)
+set(PROJECT_SOURCES
+        ${SOURCE_FILES} ${HEADER_FILES} ${UI_FILES} ${QRC_FILES}
+)
+
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY COMPILE_DEFINITIONS US_MODULE_NAME=${PROJECT_NAME})
+
 
 #设置输出目录（属性-》常规-》输出目录）（不需要改动）
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -95,6 +99,18 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/lib/${CMAKE_GENERATOR_PLATFORM}/$<CONFIGURATION>
 	LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/lib/${CMAKE_GENERATOR_PLATFORM}/$<CONFIGURATION>
 )
+
+
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Core Qt5::Concurrent ${ITK_LIBRARIES} ${VTK_LIBRARIES}
-MitkCore MitkQtWidgets MitkAlgorithmsExt ${CMAKE_SOURCE_DIR}/lib/vtkDICOM-9.1.lib
+MitkCore MitkQtWidgets MitkAlgorithmsExt ${CMAKE_SOURCE_DIR}/lib/vtkDICOM-9.1.lib CppMicroServices
 )
+target_compile_definitions(${PROJECT_NAME} PRIVATE US_MODULE_NAME=main)
+set_property(TARGET ${PROJECT_NAME} PROPERTY US_MODULE_NAME main)
+
+set(InteractionList "")
+file(GLOB_RECURSE InteractionFiles "Interactions/*")
+foreach(_source IN ITEMS ${InteractionFiles})
+    get_filename_component(FILE_NAME ${_source} NAME)
+    list(APPEND InteractionList "Interactions/${FILE_NAME}")
+endforeach()
+usFunctionEmbedResources(TARGET ${PROJECT_NAME} FILES ${InteractionList})

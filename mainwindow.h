@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow,uMainFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
     Q_INVOKABLE explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void f_Init();

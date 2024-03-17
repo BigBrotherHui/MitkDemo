@@ -2,5 +2,8 @@
   <qresource prefix="/">
     <file>Resources/robot_standby.png</file>
     <file>Resources/robot_wake.png</file>
+    <file>Resources/close.png</file>
+    <file>Interactions/TestConfig.xml</file>
+    <file>Interactions/TestInteraction.xml</file>
   </qresource>
 </RCC>

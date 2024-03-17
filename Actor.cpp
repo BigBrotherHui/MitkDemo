@@ -7,7 +7,7 @@
 
 #include "ustatus.h"
 #include <mitkProperties.h>
-
+#include <mitkIOUtil.h>
 vtkStandardNewMacro(Actor);
 
 
@@ -46,7 +46,7 @@ void Actor::f_SetDataStorage(mitk::DataStorage *pDataStorage)
 }
 
 
-int Actor::f_LoadActor()
+bool Actor::f_LoadActor()
 {
 	if (!outputNode)
 		outputNode = mitk::DataNode::New();
@@ -78,7 +78,7 @@ int Actor::f_LoadActor()
 	{
 		QString msg = "无法加载指定数据在 \r\n" + mFileName;
 		QMessageBox::critical(nullptr, "错误", msg);
-		return -1;
+		return false;
 	}
 
 	if (!mITKreader)
@@ -87,15 +87,26 @@ int Actor::f_LoadActor()
 		gdcmIO = ImageIOType::New();
 	mITKreader->SetImageIO(gdcmIO);
 	mITKreader->SetFileNames(mPaths);
-	mITKreader->Update();
+	mITKreader->ForceOrthogonalDirectionOff();
+	try
+	{
+		mITKreader->Update();
+	}
+	catch (const std::exception& e)
+	{
+		QString msg = "无法加载指定数据在 \r\n" + mFileName;
+		QMessageBox::critical(nullptr, "错误", msg);
+		return false;
+	}
 	mLayer = 0;
 	outputNode->SetProperty("name", mitk::StringProperty::New(mObjectName.toStdString().c_str()));
 	outputNode->SetProperty("dicom", mitk::BoolProperty::New(true));
 	outputNode->SetProperty("layer", mitk::IntProperty::New(mLayer));
 	outputNode->SetProperty("volumerendering", mitk::BoolProperty::New(true));
-	mitk::Image::Pointer image = mitk::ImportItkImage(mITKreader->GetOutput());
-	outputNode->SetData(image);
+	mitk::Image::Pointer image = mitk::Image::New();
+	mitk::GrabItkImageMemory(mITKreader->GetOutput(), image);
 
+	outputNode->SetData(image);
 	outputNode->Update();
 	f_GetDataStorage()->Add(outputNode);
 
@@ -104,5 +115,5 @@ int Actor::f_LoadActor()
 		mGetOrgMatrix->DeepCopy(outputNode->GetData()->GetGeometry()->GetVtkMatrix());
 		
 	}
-	return 0;
+	return true;
 }

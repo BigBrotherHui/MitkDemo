@@ -11,12 +11,10 @@ class MainToolBar : public uFunBase
 {
     Q_OBJECT
 public:
-    static int typeId;
 
 public:
     Q_INVOKABLE explicit MainToolBar(QWidget *parent = nullptr);
     ~MainToolBar();
-
 private slots:
 
 private:

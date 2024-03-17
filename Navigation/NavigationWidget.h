@@ -13,11 +13,9 @@ class NavigationWidget : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
 
     Q_INVOKABLE explicit NavigationWidget(QWidget *parent = nullptr);
     ~NavigationWidget();
-
 private:
     Ui::NavigationWidget *ui;
 };

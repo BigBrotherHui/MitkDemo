@@ -1,6 +1,6 @@
 #include "NavigationWidgetControl.h"
 #include "ui_NavigationWidgetControl.h"
-int NavigationWidgetControl::typeId = qRegisterMetaType<NavigationWidgetControl*>();
+#include "ureflect.h"
 
 NavigationWidgetControl::NavigationWidgetControl(QWidget *parent) :
     uFunBase(parent),

@@ -1,6 +1,6 @@
 #include "PreOperationDesignControl.h"
 #include "./ui_PreOperationDesignControl.h"
-int PreOperationDesignControl::typeId = qRegisterMetaType<PreOperationDesignControl*>();
+#include "ureflect.h"
 
 PreOperationDesignControl::PreOperationDesignControl(QWidget *parent)
     : uFunBase(parent)

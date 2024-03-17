@@ -62,12 +62,15 @@
        <height>22</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../resources/resources.qrc">
-       <normaloff></normaloff></iconset>
+      <iconset resource="../qr.qrc">
+       <normaloff>:/Resources/close.png</normaloff>:/Resources/close.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -80,7 +83,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../resources/resources.qrc"/>
+  <include location="../qr.qrc"/>
  </resources>
  <connections/>
 </ui>

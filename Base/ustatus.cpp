@@ -17,10 +17,10 @@ QString uStatus::mBackupDir="backup";
 QString uStatus::mDicomTmpDir="dicomTmpDir";
 QString uStatus::mMainConfigureFileName = "syscfg.ini";
 QString uStatus::mMainWindow="MainWindow";
-QString uStatus::mMainToolbarWidget="uBlank";
-QString uStatus::mMainCenterWidget="uBlank";
-QString uStatus::mMainControlWidgetRight="uBlank";
-QString uStatus::mMainControlWidgetLeft="uBlank";
+QString uStatus::mMainToolbarWidget="QWidget";
+QString uStatus::mMainCenterWidget="QWidget";
+QString uStatus::mMainControlWidgetRight="QWidget";
+QString uStatus::mMainControlWidgetLeft="QWidget";
 QString uStatus::mMainFootbarWidget="NULL";
 //
 QString uStatus::mMainPath = "";
@@ -55,15 +55,4 @@ int uStatus::mWW=100;
 int uStatus::mWL=100;
 int uStatus::mDefaultWW=100;
 int uStatus::mDefaultWL=100;
-
-//MITK
-QAction* uStatus::gActionCloseProject = nullptr;
-QToolBar* uStatus::gMainToolBar = nullptr;
-
-void(*uStatus::pFun_AIViewSetCurrent)() = nullptr;
-//void(*uStatus::pFun_AIProsthesisIVAngel)() = nullptr;
-void(*uStatus::pFun_Navigator)(double pX, double pY, double pZ)=nullptr;
-void(*uStatus::pFun_SetProsthesisFixStatus)(int pStatus);
-void(*uStatus::pFun_RefreshPatient)();
-void(*uStatus::pFun_UpdateHash)(int case_ID, QString key, QVariant value);
 

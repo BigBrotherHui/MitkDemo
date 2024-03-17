@@ -4,8 +4,10 @@
 #include <mitkRenderingManager.h>
 #include <QColorDialog>
 #include <QDebug>
-int RehearsalWidgetControl::typeId = qRegisterMetaType<RehearsalWidgetControl*>();
-
+#include "usModule.h"
+#include "usGetModuleContext.h"
+#include <vtkSphereSource.h>
+#include <mitkSurface.h>
 RehearsalWidgetControl::RehearsalWidgetControl(QWidget *parent) :
     uFunBase(parent),
     ui(new Ui::RehearsalWidgetControl)
@@ -51,4 +53,42 @@ void RehearsalWidgetControl::on_pushButton_color_clicked() {
         return;
     node->SetColor(c);
     mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+}
+
+void RehearsalWidgetControl::on_pushButton_setInteractor_clicked() {
+
+    mitk::DataNode::Pointer node= uStatus::mDataStorage->GetNamedNode("testSurface");
+    if (!node) {
+        vtkSmartPointer< vtkSphereSource> ssource = vtkSmartPointer< vtkSphereSource>::New();
+        ssource->SetRadius(20);
+        ssource->SetPhiResolution(20);
+        ssource->SetThetaResolution(20);
+        ssource->Update();
+        mitk::Surface::Pointer surface = mitk::Surface::New();
+        surface->SetVtkPolyData(ssource->GetOutput());
+        node = mitk::DataNode::New();
+        node->SetData(surface);
+        node->SetName("testSurface");
+        node->SetColor(0, 1, 0);
+        uStatus::mDataStorage->Add(node);
+    }
+    if(!interactor)
+	    interactor = mitkInteractor::New();
+    try
+    {
+		interactor->LoadStateMachine("TestInteraction.xml", us::GetModuleContext()->GetModule());
+        interactor->SetEventConfig("TestConfig.xml", us::GetModuleContext()->GetModule());
+		interactor->SetDataNode(node);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "exception:" << e.what() << std::endl;
+    }
+	mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+}
+
+void RehearsalWidgetControl::on_pushButton_unsetInteractor_clicked()
+{
+    if(interactor)
+        interactor->SetDataNode(nullptr);
 }

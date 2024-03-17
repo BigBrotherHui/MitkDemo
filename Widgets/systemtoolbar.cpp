@@ -8,11 +8,21 @@
 #include <QFileDialog>
 #include <QScreen>
 #include "runtimeutil.h"
+#include <QMenu>
+#include "usermanagerdialog.h"
 SystemToolBar::SystemToolBar(QWidget *parent) :
       QWidget(parent),
       ui(new Ui::SystemToolBar)
 {
     ui->setupUi(this);
+	ui->toolButton_settings->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->toolButton_settings->setPopupMode(QToolButton::InstantPopup);
+    m_menu = new QMenu(this);
+    m_actionUserManager = new QAction(this);
+    m_actionUserManager->setText("用户管理");
+    connect(m_actionUserManager,&QAction::triggered,this,&SystemToolBar::slot_userManager);
+    m_menu->addAction(m_actionUserManager);
+    ui->toolButton_settings->setMenu(m_menu);
 }
 
 SystemToolBar::~SystemToolBar()
@@ -20,9 +30,14 @@ SystemToolBar::~SystemToolBar()
     delete ui;
 }
 
-void SystemToolBar::on_pushButton_settings_clicked()
+void SystemToolBar::slot_userManager() {
+    UserManagerDialog dlg;
+    dlg.exec();
+}
+
+void SystemToolBar::on_toolButton_settings_clicked()
 {
-    
+	
 }
 
 void SystemToolBar::on_pushButton_screenshot_clicked()

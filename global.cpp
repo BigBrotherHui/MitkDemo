@@ -14,9 +14,9 @@ QString gSpecial = "@#$%^&*";
 
 bool IsValidId(QString pId)
 {
-    QRegularExpression re("^[^_@#$%^&*\\u4e00-\\u9fa5]{1,20}$");
-    QRegularExpressionMatch match = re.match(pId);
-    return match.hasMatch();
+	QRegularExpression re("^[a-zA-Z0-9][a-zA-Z0-9]*$");
+	QRegularExpressionMatch match = re.match(pId);
+	return match.hasMatch();
 }
 
 bool IsValidPassword(QString pPassword)

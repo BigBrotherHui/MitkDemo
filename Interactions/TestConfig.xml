@@ -1,0 +1,8 @@
+<config>
+  <event_variant class="MousePressEvent" name="StdMousePressPrimaryButtonLeft">
+    <attribute name="EventButton" value="LeftMouseButton"/>
+  </event_variant>
+  <event_variant class="MousePressEvent" name="StdMousePressPrimaryButtonRight">
+    <attribute name="EventButton" value="RightMouseButton"/>
+  </event_variant>
+</config>

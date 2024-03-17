@@ -14,13 +14,10 @@ class MainFrame : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
 
     Q_INVOKABLE explicit MainFrame(QWidget *parent = nullptr);
     ~MainFrame();
     Login *GetLogin();
-protected:
-
 private:
     Ui::MainFrame *ui;
     Login *mLogin{nullptr};

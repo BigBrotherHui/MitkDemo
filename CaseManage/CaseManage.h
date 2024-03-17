@@ -82,10 +82,8 @@ public:
         CASE_PATIENTAGE,
         CASE_DOCTORNAME,
     };
-    static int typeId;
-    Q_INVOKABLE explicit CaseManage(QWidget *parent = nullptr);
+    explicit CaseManage(QWidget *parent = nullptr);
     ~CaseManage();
-
     //
     static const std::string PROJECT_PATH;
     static casetable_tuple currentCase;
@@ -111,6 +109,7 @@ public:
     void f_closeCase();
     bool f_RemoveCaseByCaseId(int pCaseId);
     int  f_GetSelectedCaseId();
+
   Q_SIGNALS:
       void signalFinishedOpen();
 

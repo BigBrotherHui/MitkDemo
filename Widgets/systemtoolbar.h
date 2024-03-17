@@ -2,7 +2,8 @@
 #define SYSTEMTOOLBAR_H
 
 #include <QWidget>
-
+class QMenu;
+class QAction;
 namespace Ui {
 class SystemToolBar;
 }
@@ -16,14 +17,17 @@ public:
     ~SystemToolBar();
 
 private slots:
-    void on_pushButton_settings_clicked();
+    void on_toolButton_settings_clicked();
 
     void on_pushButton_screenshot_clicked();
 
     void on_pushButton_exit_clicked();
 
+    void slot_userManager();
 private:
     Ui::SystemToolBar *ui;
+    QMenu* m_menu;
+    QAction* m_actionUserManager;
 };
 
 #endif // SYSTEMTOOLBAR_H

@@ -13,7 +13,7 @@
 #include "global.h"
 #include "SqlDemo.h"
 #include <QTimer>
-int MainWindow::typeId = qRegisterMetaType<MainWindow*>();
+#include "ureflect.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

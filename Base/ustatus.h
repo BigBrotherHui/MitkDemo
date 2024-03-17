@@ -157,48 +157,6 @@ public:
 	*/
 	static QString mImageObjectPathName;
 
-	//MITK
-	/**
-	* @brief MITK 关闭工程 主窗口上的工具栏和菜单使用到的QAction
-	*
-	*/
-	static QAction* gActionCloseProject;
-
-	/**
-	* @brief MITK 主窗口上的工具栏
-	*
-	*/
-	static QToolBar* gMainToolBar;
-
-	/**
-	* @brief 刷新PluginAI上的显示窗口方法
-	*
-	*/
-	static void(*pFun_AIViewSetCurrent)();
-
-	/**
-	* @brief 刷新坐标
-	*
-	*/
-	static void(*pFun_Navigator)(double pX,double pY,double pZ);
-	/**
-	* @brief 设置界面是否可用
-	*
-	*/
-	static void(*pFun_SetProsthesisFixStatus)(int pStatus);
-	//static void(*pFun_AIProsthesisIVAngel)();
-
-	/**
-	* @brief 设置界面是否可用
-	*
-	*/
-	static void(*pFun_RefreshPatient)();
-	
-	/**
-	* @brief 更新数据库Hash信息用
-	*
-	*/
-	static void(*pFun_UpdateHash)(int case_ID, QString key, QVariant value);
 };
 
 #endif // USTATUS_H

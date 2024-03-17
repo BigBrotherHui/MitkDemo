@@ -6,7 +6,6 @@
 #include "ui_StdMultiWidget.h"
 #include "QmitkStdMultiWidget.h"
 #include "QmitkLevelWindowWidget.h"
-int StdMultiWidget::typeId = qRegisterMetaType<StdMultiWidget*>();
 
 StdMultiWidget::StdMultiWidget(QWidget *parent) :
     uFunBase(parent),

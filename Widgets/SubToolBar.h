@@ -6,14 +6,7 @@
 #include "ufunbase.h"
 #include <QtCore/qobjectdefs.h>
 #include <QPushButton>
-/**
-  \brief SubToolBar
 
-   IP-002 THA 主菜单
-
-  \sa uFunBase
-  \ingroup SubToolBar
-*/
 
 class QWidget;
 
@@ -33,9 +26,9 @@ public:
         Page_Demo,
         Page_Navigate
     };
-    static int typeId;
     Q_INVOKABLE explicit SubToolBar(QWidget *parent = nullptr);
     ~SubToolBar();
+public:
     void f_Refresh() override;
     void f_Init() override;
     void setCurrentPage(Page p);
