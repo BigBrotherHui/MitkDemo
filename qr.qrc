@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/robot_connect.png</file>
+        <file>res/camera_connect.png</file>
+        <file>res/camera_disconnect.png</file>
+        <file>res/robot_disconnect.png</file>
+        <file>res/serialport_connect.png</file>
+        <file>res/serialport_disconnect.png</file>
+        <file>res/Logo_n2t.png</file>
+        <file>res/Logo_nt.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,30 @@
+#ifndef ROBOT_STATE_H
+#define ROBOT_STATE_H
+
+#include <QObject>
+#include <QtCore>
+
+enum class RobotState : qint32
+{ 
+	ROBOT_EXCEPTION = -1,
+	ROBOT_NONE = 0,
+	ROBOT_CONNECTED_MOTOR_OFF,
+	ROBOT_CONNECTED_MOTOR_ON,
+	ROBOT_MOVING,
+	ROBOT_DRAGING,
+};
+
+enum class RobotErrorCode : qint32
+{
+	ROBOT_UNCONNECTED_UPPC = 1,		//上位机和下位机无法连接(RCF调用失败)
+	ROBOT_EXCE_NONE = 0,
+	ROBOT_SOFT_LIMIT = -1,
+	ROBOT_SINGULAR_POSE = -2,
+	ROBOT_UNCONNECTED = -3,
+	ROBOT_SAFETY_STOP_ON = -4,
+	ROBOT_FORCESENSOR_STOP = -6,
+	ROBOT_COMMAND_FAIL = -7,
+	ROBOT_HARD_LIMIT = -8
+};
+
+#endif //ROBOT_STATE_H
