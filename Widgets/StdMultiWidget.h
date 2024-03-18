@@ -26,7 +26,6 @@ class StdMultiWidget : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
 
     Q_INVOKABLE explicit StdMultiWidget(QWidget *parent = nullptr);
     ~StdMultiWidget();

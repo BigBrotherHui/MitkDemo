@@ -127,7 +127,7 @@ color:black;
             <string/>
            </property>
            <property name="placeholderText">
-            <string>请输入患者姓名</string>
+            <string>请输入患者姓名/ID</string>
            </property>
           </widget>
          </item>
@@ -545,7 +545,7 @@ color:black;
                   <property name="bottomMargin">
                    <number>160</number>
                   </property>
-                  <item>
+                                    <item>
                    <widget class="QWidget" name="widget_5" native="true">
                     <layout class="QHBoxLayout" name="horizontalLayout">
                      <property name="spacing">

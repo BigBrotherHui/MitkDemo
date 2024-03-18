@@ -195,13 +195,13 @@ color:#DBE3F7;
           <height>70</height>
          </size>
         </property>
-        <property name="maximumSize">
+       <property name="maximumSize">
          <size>
           <width>200</width>
           <height>70</height>
          </size>
         </property>
-        <property name="styleSheet">
+       <property name="styleSheet">
          <string notr="true">background-image: url(:/Resources/Logo_nt1.png);</string>
         </property>
         <property name="text">

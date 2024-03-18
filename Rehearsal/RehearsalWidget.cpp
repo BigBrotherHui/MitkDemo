@@ -1,7 +1,6 @@
 #include "RehearsalWidget.h"
 #include "ui_RehearsalWidget.h"
 #include <mitkBaseRenderer.h>
-int RehearsalWidget::typeId = qRegisterMetaType<RehearsalWidget*>();
 
 RehearsalWidget::RehearsalWidget(QWidget *parent) :
     uFunBase(parent),

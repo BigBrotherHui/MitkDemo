@@ -7,31 +7,49 @@
 #include "QMessageBox.h"
 #include <QFileDialog>
 #include <QScreen>
-
 //#include "runtimeutil.h"
+#include <QMenu>
+#include "usermanagerdialog.h"
 SystemToolBar::SystemToolBar(QWidget *parent) :
       QWidget(parent),
       ui(new Ui::SystemToolBar)
 {
     ui->setupUi(this);
-
     dialog = QPointer<SystemConfigWidget>(new SystemConfigWidget(this));
+
+	ui->toolButton_settings->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->toolButton_settings->setPopupMode(QToolButton::InstantPopup);
+    m_menu = new QMenu(this);
+    m_actionUserManager = new QAction(this);
+    m_actionUserManager->setText("用户管理");
+    m_actionSystemConfig = new QAction(this);
+    m_actionSystemConfig->setText("控制面板");
+    connect(m_actionUserManager,&QAction::triggered,this,&SystemToolBar::slot_userManager);
+    connect(m_actionSystemConfig, &QAction::triggered, this, &SystemToolBar::slot_systemConfig);
+    m_menu->addAction(m_actionUserManager);
+    m_menu->addAction(m_actionSystemConfig);
+    ui->toolButton_settings->setMenu(m_menu);
 }
 
 SystemToolBar::~SystemToolBar()
 {
     delete ui;
-	if (dialog)
+    if (dialog)
 	{
 		delete dialog;
 		dialog = nullptr;
-	}
+    }
 	qDebug() << "SystemConfigWidget::~SystemConfigWidget finished";
 }
 
-void SystemToolBar::on_pushButton_settings_clicked()
+void SystemToolBar::slot_userManager() {
+    UserManagerDialog dlg;
+    dlg.exec();
+}
+
+void SystemToolBar::slot_systemConfig()
 {
-    dialog->setWindowTitle("控制面板");
+	dialog->setWindowTitle("控制面板");
     dialog->exec();
 }
 

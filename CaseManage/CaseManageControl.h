@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "ufunbase.h"
-#include "ufunction.h"
 #include "ustatus.h"
 #include <stack>
 #include <vtkImageData.h>
@@ -19,7 +18,6 @@ class CaseManageControl : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
     struct RenderInfo
     {
     public:

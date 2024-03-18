@@ -78,7 +78,7 @@ int Actor::f_LoadActor()
 	{
 		QString msg = "无法加载指定数据在 \r\n" + mFileName;
 		QMessageBox::critical(nullptr, "错误", msg);
-		return -1;
+		return false;
 	}
 
 	if (!mITKreader)
@@ -87,6 +87,7 @@ int Actor::f_LoadActor()
 		gdcmIO = ImageIOType::New();
 	mITKreader->SetImageIO(gdcmIO);
 	mITKreader->SetFileNames(mPaths);
+	mITKreader->ForceOrthogonalDirectionOff();
 	mITKreader->Update();
 	mLayer = 0;
 	outputNode->SetProperty("name", mitk::StringProperty::New(mObjectName.toStdString().c_str()));
@@ -104,5 +105,5 @@ int Actor::f_LoadActor()
 		mGetOrgMatrix->DeepCopy(outputNode->GetData()->GetGeometry()->GetVtkMatrix());
 		
 	}
-	return 0;
+	return 1;
 }

@@ -4,8 +4,7 @@
 #include "ustatus.h"
 #include <QDebug>
 
-int MainFrame::typeId = qRegisterMetaType<MainFrame*>();
-MainFrame::MainFrame(QWidget *parent) :
+MainFrame::MainFrame(QWidget* parent) :
       uFunBase(parent),
       ui(new Ui::MainFrame)
 {

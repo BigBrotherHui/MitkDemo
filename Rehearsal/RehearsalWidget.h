@@ -14,11 +14,8 @@ class RehearsalWidget : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
-
-    Q_INVOKABLE explicit RehearsalWidget(QWidget *parent = nullptr);
+    explicit RehearsalWidget(QWidget *parent = nullptr);
     ~RehearsalWidget();
-    
 private:
     Ui::RehearsalWidget *ui;
     mitk::StandaloneDataStorage::Pointer m_dataStorage;

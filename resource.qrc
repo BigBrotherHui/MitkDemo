@@ -8,5 +8,6 @@
         <file>res/serialport_disconnect.png</file>
         <file>res/Logo_n2t.png</file>
         <file>res/Logo_nt.png</file>
+        <file>res/close.png</file>
     </qresource>
 </RCC>

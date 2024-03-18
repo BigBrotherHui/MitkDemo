@@ -66,8 +66,8 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../resources/resources.qrc">
-       <normaloff></normaloff></iconset>
+      <iconset resource="../resource.qrc">
+       <normaloff>:/res/close.png</normaloff>:/res/close.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -80,7 +80,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../resources/resources.qrc"/>
+  <include location="../resource.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,9 +1,10 @@
 #ifndef SYSTEMTOOLBAR_H
 #define SYSTEMTOOLBAR_H
 #include "SystemConfigWidget.h"
-#include <QWidget>
 #include <QPointer>
-
+#include <QWidget>
+class QMenu;
+class QAction;
 namespace Ui {
 class SystemToolBar;
 }
@@ -17,15 +18,18 @@ public:
     ~SystemToolBar();
 
 private slots:
-    void on_pushButton_settings_clicked();
+    void slot_systemConfig();
 
     void on_pushButton_screenshot_clicked();
 
     void on_pushButton_exit_clicked();
 
+    void slot_userManager();
 private:
     Ui::SystemToolBar *ui;
-
+    QMenu* m_menu;
+    QAction* m_actionUserManager;
+    QAction* m_actionSystemConfig;
     QPointer<SystemConfigWidget> dialog{ nullptr };
 };
 

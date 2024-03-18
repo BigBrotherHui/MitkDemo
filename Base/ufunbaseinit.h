@@ -6,7 +6,6 @@ class uFunBaseInit
 {
 public:
     static uFunBaseInit *getInStance();
-    void f_InitBaseWidgetName();
     
 private:
     explicit uFunBaseInit();

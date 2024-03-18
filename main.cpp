@@ -190,12 +190,12 @@ void setCodeForLocal()
 }
 int main(int argc, char *argv[])
 {
-    //vtkOutputWindow::SetGlobalWarningDisplay(0);
+	//vtkOutputWindow::SetGlobalWarningDisplay(0);
     QApplication a(argc, argv);
     a.setApplicationName("DentalRobot");
     a.setOrganizationName("None");
 
-
+    
 	
     if(FindProcess("DentalRobot.exe"))
     {
@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
 // 		Config::SetRunning(false);
 //     }
     QmitkRegisterClasses();
-	RCF::init();
+    RCF::init();
 	//For CUDA
 	checkCudaVersion();
 
@@ -231,7 +231,6 @@ int main(int argc, char *argv[])
     {
         return 0;
     }
-    uFunBaseInit::getInStance()->f_InitBaseWidgetName();
     MainFrame m;
 	SystemControler::getInstance();
 	//开启所有线程

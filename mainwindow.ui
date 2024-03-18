@@ -96,7 +96,7 @@ background: #131720;
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
+<item>
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -204,7 +204,7 @@ color:white;
           </item>
           <item>
            <widget class="QLabel" name="label_patientInfo">
-            <property name="minimumSize">
+<property name="minimumSize">
              <size>
               <width>0</width>
               <height>25</height>
@@ -220,7 +220,7 @@ color:white;
           </item>
           <item>
            <widget class="QLabel" name="label_time">
-            <property name="minimumSize">
+<property name="minimumSize">
              <size>
               <width>0</width>
               <height>25</height>
@@ -267,7 +267,7 @@ color:white;
          <property name="styleSheet">
           <string notr="true">
 border-image: url(:/Resources/robot_standby.png);</string>
-         </property>
+                  </property>
          <property name="text">
           <string/>
          </property>
@@ -339,7 +339,7 @@ border-image: url(:/Resources/robot_standby.png);</string>
          </property>
         </widget>
        </item>
-       <item>
+<item>
         <widget class="QLabel" name="label">
          <property name="enabled">
           <bool>true</bool>
@@ -391,27 +391,6 @@ border-image: url(:/Resources/robot_standby.png);</string>
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="QStackedWidget" name="stackedWidget_control_left">
-         <property name="minimumSize">
-          <size>
-           <width>64</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <widget class="QWidget" name="page"/>
-         <widget class="QWidget" name="page_2"/>
-        </widget>
-       </item>
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="sizePolicy">
@@ -477,20 +456,6 @@ border-image: url(:/Resources/robot_standby.png);</string>
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QStackedWidget" name="stackedWidget_foot">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 170, 127);</string>
-      </property>
-      <widget class="QWidget" name="stackedWidget_bottomPage1"/>
      </widget>
     </item>
    </layout>

@@ -1277,30 +1277,30 @@ vtkSmartPointer<vtkImageData> DicomImageUtil::DilateImage(vtkSmartPointer<vtkIma
     }
     //TODO 由于测试了vtk的膨胀类没有效果，暂时使用itk的膨胀类
     //转换为itkImage
-//     const int dimension = 3;
-//     using ImageType = itk::Image<signed short, dimension>;
-//     using VTKToITK = itk::VTKImageToImageFilter<ImageType>;
-//     VTKToITK::Pointer vtkToItk = VTKToITK::New();
-//     vtkToItk->SetInput(newImageData);
-//     vtkToItk->Update();
-//     auto itkImage = vtkToItk->GetOutput();
-//     //使用itk方法进行膨胀
-//     using StructuringElementType = itk::FlatStructuringElement<dimension>;
-//     StructuringElementType::RadiusType radius;
-//     radius.Fill(pDilateValue);
-//     StructuringElementType structuringElement = StructuringElementType::Ball(radius);
-//     using BinaryDilateImageFilterType = itk::BinaryDilateImageFilter<ImageType, ImageType, StructuringElementType>;
-//     BinaryDilateImageFilterType::Pointer dilateFilter = BinaryDilateImageFilterType::New();
-//     dilateFilter->SetInput(itkImage);
-//     dilateFilter->SetKernel(structuringElement);
-//     dilateFilter->SetForegroundValue(pForegroundValue);
-//     //转换为vtkImage
-//     using ITKToVTK = itk::ImageToVTKImageFilter<ImageType>;
-//     ITKToVTK::Pointer itkToVtk = ITKToVTK::New();
-//     itkToVtk->SetInput(dilateFilter->GetOutput());
-//     itkToVtk->Update();
-//     newImageData = vtkSmartPointer<vtkImageData>::New();
-//     newImageData->DeepCopy(itkToVtk->GetOutput());
+    //     const int dimension = 3;
+    //     using ImageType = itk::Image<signed short, dimension>;
+    //     using VTKToITK = itk::VTKImageToImageFilter<ImageType>;
+    //     VTKToITK::Pointer vtkToItk = VTKToITK::New();
+    //     vtkToItk->SetInput(newImageData);
+    //     vtkToItk->Update();
+    //     auto itkImage = vtkToItk->GetOutput();
+    //     //使用itk方法进行膨胀
+    //     using StructuringElementType = itk::FlatStructuringElement<dimension>;
+    //     StructuringElementType::RadiusType radius;
+    //     radius.Fill(pDilateValue);
+    //     StructuringElementType structuringElement = StructuringElementType::Ball(radius);
+    //     using BinaryDilateImageFilterType = itk::BinaryDilateImageFilter<ImageType, ImageType, StructuringElementType>;
+    //     BinaryDilateImageFilterType::Pointer dilateFilter = BinaryDilateImageFilterType::New();
+    //     dilateFilter->SetInput(itkImage);
+    //     dilateFilter->SetKernel(structuringElement);
+    //     dilateFilter->SetForegroundValue(pForegroundValue);
+    //     //转换为vtkImage
+    //     using ITKToVTK = itk::ImageToVTKImageFilter<ImageType>;
+    //     ITKToVTK::Pointer itkToVtk = ITKToVTK::New();
+    //     itkToVtk->SetInput(dilateFilter->GetOutput());
+    //     itkToVtk->Update();
+    //     newImageData = vtkSmartPointer<vtkImageData>::New();
+    //     newImageData->DeepCopy(itkToVtk->GetOutput());
     qDebug()<<QTime::currentTime()<<"DicomImageUtil::DilateImage finish";
     return newImageData;
 }

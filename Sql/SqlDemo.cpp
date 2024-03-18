@@ -29,7 +29,6 @@ bool SqlDemo::dbExist=true;
 bool SqlDemo::Initialize()
 {
     s_storageDir = QCoreApplication::applicationDirPath();
-    uStatus::pFun_UpdateHash = &(f_UpdateCaseTableTupleFunction);
     if (!ConnectDB())
     {
         qDebug() << "db connect fail";
@@ -599,7 +598,7 @@ std::vector<casetable_tuple> SqlDemo::SearchCaseByKeyword(QString keyword)
 std::vector<casetable_tuple> SqlDemo::SearchCaseByKeywordAndCaseOperator(QString keyword, QString pCaseOperator)
 {
     QString strsql="select case_id,case_directory,case_create_date,patient_name,patient_id,patient_gender,patient_age,"
-                     "surgery_operator from casetable where case_operator=? and (case_id like '%keyword%' or patient_name like '%keyword%' ) order by case_id DESC;";
+                     "surgery_operator from casetable where case_operator=? and (patient_id like '%keyword%' or patient_name like '%keyword%' ) order by case_id DESC;";
     strsql=strsql.replace("keyword",keyword);
     QSqlQuery sql_query;
     sql_query.prepare(strsql);

@@ -25,7 +25,6 @@
 #include "SqlDemo.h"
 #include "global.h"
 #include "ustatus.h"
-#include "ufunction.h"
 #include "mainframe.h"
 #include "cryptoutil.h"
 #include "Config.h"
@@ -48,11 +47,11 @@ Login::Login(QWidget *parent) :
           ui->lineEdit_password->setText("password");
           mPassword = Config::GetPassword();
     }
-//     else if (RuntimeUtil::GetDebug())
-//     {
-//         ui->lineEdit_loginName->setText(LOGIN_ID_ADMIN);
-//         ui->lineEdit_password->setText(DEFAULT_PASSWORD);
-//     }
+    //     else if (RuntimeUtil::GetDebug())
+    //     {
+    //         ui->lineEdit_loginName->setText(LOGIN_ID_ADMIN);
+    //         ui->lineEdit_password->setText(DEFAULT_PASSWORD);
+    //     }
     //设置账号、密码框图标
     {
         QHBoxLayout *layout = new QHBoxLayout(this);

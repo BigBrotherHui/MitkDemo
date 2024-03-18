@@ -12,7 +12,6 @@ class RehearsalWidgetControl : public uFunBase
     Q_OBJECT
 
 public:
-    static int typeId;
 
     Q_INVOKABLE explicit RehearsalWidgetControl(QWidget *parent = nullptr);
     ~RehearsalWidgetControl();
@@ -21,7 +20,7 @@ public:
 protected slots:
     void on_horizontalSlider_opacity_valueChanged(int);
     void on_pushButton_color_clicked();
-private:
+    private:
     Ui::RehearsalWidgetControl *ui;
 };
 

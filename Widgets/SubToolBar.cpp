@@ -2,14 +2,10 @@
 #include "ui_SubToolBar.h"
 #include <QDebug>
 #include "ufunbase.h"
-#include "ufunction.h"
 #include "ustatus.h"
-#include "umainfunbase.h"
 #include "QMessageBox"
 #include "global.h"
 #include <QButtonGroup>
-
-int SubToolBar::typeId = qRegisterMetaType<SubToolBar*>();
 
 SubToolBar::SubToolBar(QWidget *parent) :
     uFunBase(parent),
@@ -45,30 +41,26 @@ void SubToolBar::setCurrentPage(Page p)
 
 void SubToolBar::on_pushButton_casemanage_clicked()
 {
-    uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_Open_Center("CaseManage");
-    mMainFunBase->f_OpenControl_right("CaseManageControl");
+    uStatus::mMain->SetCurrentCenterWidget(MainWindow::CenterWidget_CaseManage);
+    uStatus::mMain->SetCurrentControlWidget(MainWindow::ControlWidget_CaseManageControl);
 }
 
 void SubToolBar::on_pushButton_design_clicked()
 {
-    uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_Open_Center("StdMultiWidget");
-    mMainFunBase->f_OpenControl_right("PreOperationDesignControl");
+    uStatus::mMain->SetCurrentCenterWidget(MainWindow::CenterWidget_StdMultiWidget);
+    uStatus::mMain->SetCurrentControlWidget(MainWindow::ControlWidget_PreOperationDesignControl);
 }
 
 void SubToolBar::on_pushButton_rehearsal_clicked()
 {
-    uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_Open_Center("RehearsalWidget");
-    mMainFunBase->f_OpenControl_right("RehearsalWidgetControl");
+    uStatus::mMain->SetCurrentCenterWidget(MainWindow::CenterWidget_RehearWidget);
+    uStatus::mMain->SetCurrentControlWidget(MainWindow::ControlWidget_RehearsalWidgetControl);
 }
 
 void SubToolBar::on_pushButton_navigate_clicked()
 {
-    uMainFunBase* mMainFunBase = uFunction::getInStance()->f_GetMain();
-    mMainFunBase->f_Open_Center("NavigationWidget");
-    mMainFunBase->f_OpenControl_right("NavigationWidgetControl");
+    uStatus::mMain->SetCurrentCenterWidget(MainWindow::CenterWidget_NavigationWidget);
+    uStatus::mMain->SetCurrentControlWidget(MainWindow::ControlWidget_NavigationWidgetControl);
 }
 
 void SubToolBar::on_buttonGroup_idClicked(int id)

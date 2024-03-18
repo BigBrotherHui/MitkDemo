@@ -4,7 +4,6 @@
 #include <mitkRenderingManager.h>
 #include <QColorDialog>
 #include <QDebug>
-int RehearsalWidgetControl::typeId = qRegisterMetaType<RehearsalWidgetControl*>();
 
 RehearsalWidgetControl::RehearsalWidgetControl(QWidget *parent) :
     uFunBase(parent),

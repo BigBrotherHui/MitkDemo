@@ -6,8 +6,26 @@
 #include "ui_StdMultiWidget.h"
 #include "QmitkStdMultiWidget.h"
 #include "QmitkLevelWindowWidget.h"
-#include "QmitkRenderWindow.h"
-int StdMultiWidget::typeId = qRegisterMetaType<StdMultiWidget*>();
+#include <QmitkRenderWindow.h>
+class vtkMyCallback : public vtkCommand
+{
+public:
+    static vtkMyCallback* New() { return new vtkMyCallback; }
+
+    vtkMyCallback()
+    {
+    }
+
+    ~vtkMyCallback()
+    {
+
+    }
+
+    virtual void Execute(vtkObject* caller, unsigned long eventId, void* callData)
+    {
+        std::cout << "Execute" << std::endl;
+    }
+};
 
 StdMultiWidget::StdMultiWidget(QWidget *parent) :
     uFunBase(parent),
@@ -30,7 +48,7 @@ void StdMultiWidget::f_Init()
     {
         return ;
     }
-    
+
 
     vlayout = new QVBoxLayout(ui->widget);
     vlayout->setMargin(0);
@@ -53,9 +71,12 @@ void StdMultiWidget::f_Init()
 
     multiWidget->SetWidgetPlanesVisibility(false, multiWidget->GetRenderWindow4()->GetRenderer());
     multiWidget->SetCrosshairGap(0);
+
+    vtkSmartPointer<vtkMyCallback> m_callback = vtkSmartPointer<vtkMyCallback>::New();
+    multiWidget->GetRenderWindow4()->interactor()->AddObserver(vtkCommand::LeftButtonPressEvent, m_callback);
     hlayout->setStretchFactor(multiWidget.get(),100);
 
-
+    
 }
 
 void StdMultiWidget::f_Destroy()

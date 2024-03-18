@@ -16,45 +16,6 @@
 #include "thadicomseries.h"
 #include "DicomTag.h"
 
-#define MAX_PATH_LEN 256
-
-#ifdef WIN32
-#include <io.h>
-#include <direct.h>
-#else
-#include <unistd.h>
-#include <sys/stat.h>
-#endif
-
-#ifdef WIN32
-#define ACCESS(fileName,accessMode) _access(fileName,accessMode)
-#define MKDIR(path) _mkdir(path)
-#else
-#define ACCESS(fileName,accessMode) access(fileName,accessMode)
-#define MKDIR(path) mkdir(path,S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
-#endif
-
-#define MAX_PATH_LEN 256
-
-#ifdef WIN32
-#include <io.h>
-#include <direct.h>
-#else
-#include <unistd.h>
-#include <sys/stat.h>
-#endif
-
-#ifdef WIN32
-#define ACCESS(fileName,accessMode) _access(fileName,accessMode)
-#define MKDIR(path) _mkdir(path)
-#else
-#define ACCESS(fileName,accessMode) access(fileName,accessMode)
-#define MKDIR(path) mkdir(path,S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
-#endif
-
-
-
-//
 #include "ufunbase.h"
 //
 #include "caseinfodialog.h"
@@ -82,10 +43,8 @@ public:
         CASE_PATIENTAGE,
         CASE_DOCTORNAME,
     };
-    static int typeId;
-    Q_INVOKABLE explicit CaseManage(QWidget *parent = nullptr);
+    explicit CaseManage(QWidget *parent = nullptr);
     ~CaseManage();
-
     //
     static const std::string PROJECT_PATH;
     static casetable_tuple currentCase;
@@ -111,6 +70,7 @@ public:
     void f_closeCase();
     bool f_RemoveCaseByCaseId(int pCaseId);
     int  f_GetSelectedCaseId();
+
   Q_SIGNALS:
       void signalFinishedOpen();
 
